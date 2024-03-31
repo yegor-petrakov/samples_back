@@ -104,6 +104,46 @@ GROUP BY
 
 
 
+/* Codes In Vaults */
+
+SELECT
+    civ.id,
+    civ.code_id,
+    json_build_object(
+        'id', c.id,
+        'code_index', c.code_index
+    ) AS code_data,
+    civ.vault_id,
+    json_build_object(
+        'id', v.id,
+        'vault_name', v.vault_name
+    ) AS vault_data
+FROM
+    codes_in_vaults civ
+JOIN
+    codes c ON civ.code_id = c.id
+JOIN
+    vaults v ON civ.vault_id = v.id
+WHERE
+    civ.vault_id = <vault_id>;
+
+{
+    id,
+    code_id,
+    code_data: {
+        c.id,
+        c.code_index
+    },
+    vault_id,
+    vault_data: {
+        v.id,
+        v.vault_name
+    }
+}
+
+
+
+
 
 
 
