@@ -5,7 +5,28 @@ const database = require('../config/dbConn')
 // @access Private
 const getAllCodesInVaults = async (req, res) => {
 
-    const codesInVaults = await database.query(`SELECT * FROM codes_in_vaults`)
+    const codesInVaults = await database.query(`
+
+        SELECT
+            civ.id,
+            civ.code_id,
+            json_build_object(
+                'id', c.id,
+                'code_index', c.code_index
+            ) AS code_data,
+            civ.vault_id,
+            json_build_object(
+                'id', v.id,
+                'vault_name', v.vault_name
+            ) AS vault_data
+        FROM
+            codes_in_vaults civ
+        JOIN
+            codes c ON civ.code_id = c.id
+        JOIN
+            vaults v ON civ.vault_id = v.id
+
+    `)
 
     if (codesInVaults.rowCount === 0) {
         return res.status(400).json({ message: 'No relations between codes and vaults found' })

@@ -234,3 +234,4 @@
 20240330	21:42:06	272630ae-aede-4efc-8450-c98673c48614	error: value too long for type character varying(100)	PATCH	/vaults	http://localhost:5173
 20240330	22:20:22	208bd969-977e-4714-96ce-a715e4f78315	Too Many Requests: Too many login attempts from this IP, please try again after a 60 second pause	POST	/	http://localhost:5173
 20240331	08:36:19	7c9c4b3b-6784-4520-8609-6802abbb22e8	error: syntax error at or near "c"	GET	/codes	http://localhost:5173
+20240331	13:52:40	2ac05878-2ecc-40c5-9c90-dd6c22f9c027	error: update or delete on table "vaults" violates foreign key constraint "codes_in_vaults_vault_id_fkey" on table "codes_in_vaults"	DELETE	/vaults	http://localhost:5173
